@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/FMI/hw2/Control.h
+
+D:/FMI/hw2/Control_children.h
+Control.h
+D:/FMI/hw2/Control.h
+
+D:/FMI/hw2/main.cpp
+iostream
+-
+Control.h
+D:/FMI/hw2/Control.h
+Control_children.h
+D:/FMI/hw2/Control_children.h
+string.h
+D:/FMI/hw2/string.h
+
