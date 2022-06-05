@@ -64,14 +64,16 @@ Checkbox::Checkbox(
 }
 
 Checkbox::Checkbox(Checkbox &other) {
-    is_checked = other.is_it_checked();
-    text_len = other.text_len;
-    position = other.get_position();
-    size = other.get_size();
-    type = input;
-    delete[] text;
-    text = new char[text_len];
-    copy_text(text, other.get_text(), text_len);
+    if (this != &other) {
+        is_checked = other.is_it_checked();
+        text_len = other.text_len;
+        position = other.get_position();
+        size = other.get_size();
+        type = input;
+        delete[] text;
+        text = new char[text_len];
+        copy_text(text, other.get_text(), text_len);
+    }
 }
 
 bool Checkbox::is_it_checked() const {
@@ -177,8 +179,10 @@ RadioButton::RadioButton(
     copy_longest_text(text, longest);
 }
 
-RadioButton::RadioButton(RadioButton &other) {
-    *this = other;
+//RadioButton::RadioButton(RadioButton &other) {
+//    if (this != &other){
+//        *this = other;
+//    }
 //    delete[] options;
 //    delete[] text;
 //    type = input;
@@ -191,7 +195,7 @@ RadioButton::RadioButton(RadioButton &other) {
 //    text_len = other.get_text_len();
 //    text = new char[text_len];
 //    Checkbox::copy_text(text, other.get_text(), text_len);
-}
+//}
 
 RadioButton& RadioButton::operator=(RadioButton &other) {
     if (this == &other) {
