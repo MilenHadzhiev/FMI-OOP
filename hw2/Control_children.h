@@ -88,15 +88,16 @@ class TextBox : public Control { // variable size
 public:
     TextBox() : Control() {};
 
-    TextBox(Position &new_pos, Size &new_size);
+    TextBox(Position &new_pos, Size &new_size, const char* new_text);
 
-    TextBox(TextBox &other);
+    TextBox(TextBox &other) = default;
 
-    const char *get_state() const;
+    const char *get_state(char * res) const;
 
 };
 
 class ListBox : public Control { // height = 1; length = len(longest_element);
+
 };
 
 class Panel : public Control { // size = the minimal that can contain all controls

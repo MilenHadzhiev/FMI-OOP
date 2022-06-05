@@ -19,6 +19,10 @@ public:
 
     ~Form();
 
+    void set_name(const char *new_name);
+
+    void add_new_control(Control &new_control) { controls[controls_count++] = new_control; };
+
     void display_form();
 
     const char *get_name() const { return name; };

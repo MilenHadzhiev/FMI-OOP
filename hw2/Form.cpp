@@ -31,13 +31,18 @@ Form::Form(Form &other) {
         controls_count = other.get_controls_count();
         controls = new Control[controls_count];
         copy_controls(other.controls, controls_count);
-
     }
 }
 
 Form::~Form() {
     delete[] name;
     delete[] controls;
+}
+
+void Form::set_name(const char *new_name) {
+    delete[] name;
+    name = new char[strlen(new_name)];
+    strcpy(name, new_name);
 }
 
 Control* Form::get_control_by_id(int id_to_find) {

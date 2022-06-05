@@ -179,10 +179,10 @@ RadioButton::RadioButton(
     copy_longest_text(text, longest);
 }
 
-//RadioButton::RadioButton(RadioButton &other) {
-//    if (this != &other){
-//        *this = other;
-//    }
+RadioButton::RadioButton(RadioButton &other) {
+    if (this != &other){
+        *this = other;
+    }
 //    delete[] options;
 //    delete[] text;
 //    type = input;
@@ -195,7 +195,7 @@ RadioButton::RadioButton(
 //    text_len = other.get_text_len();
 //    text = new char[text_len];
 //    Checkbox::copy_text(text, other.get_text(), text_len);
-//}
+}
 
 RadioButton& RadioButton::operator=(RadioButton &other) {
     if (this == &other) {
@@ -224,16 +224,24 @@ void RadioButton::add_option(Checkbox &new_option) {
 // Textbox
 
 
-TextBox::TextBox(Position &new_pos, Size &new_size) {
+TextBox::TextBox(
+        Position &new_pos,
+        Size &new_size,
+        const char* new_text
+        ) : Control(
+                new_pos,
+                new_size,
+                new_text,
+                both
+                ) {}
 
-}
 
-TextBox::TextBox(TextBox &other) {
-
-}
-
-const char* TextBox::get_state() const {
-    return ":as";// not finished
+const char* TextBox::get_state(char* res) const {
+    res[size.get_length()] = '\0';
+    for (int i = 0; i < size.get_length(); i++) {
+        res[i] = text[i];
+    }
+    return res;
 }
 
 
