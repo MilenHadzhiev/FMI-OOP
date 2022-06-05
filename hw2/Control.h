@@ -10,7 +10,7 @@ public:
     Position();
 
     Position(unsigned int new_x,
-             unsigned int new_y);  // if 2 controls have the same coordinates the last one called will be shown
+             unsigned int new_y);  // if 2 controls have the same coordinates the first one called will be shown
 
     Position(Position &other);
 
@@ -49,10 +49,11 @@ public:
     Size &operator=(const Size &other);
 };
 
-class Control {
+class   Control {
     int unique_id;
     static int id_counter;
 protected:
+    int text_len;
     Size size;
     Position position;
     inout type; // default = both
@@ -81,19 +82,23 @@ public:
 
     void set_type_enum(inout new_type);
 
-    void set_text(const char *new_text);
+    virtual void set_text(const char* new_text);
+
+    void set_position(int x, int y);
 
     int get_unique_id() const;
 
-    Size get_size();
+    Size& get_size();
 
-    Position get_position();
+    Position& get_position();
 
-    virtual const char *get_text() const;
+    const char *get_text() const;
+
+    int get_text_len() const { return text_len; };
 
     inout get_type();
 
-    const char *get_type_text() const;
+    const char *get_type_str() const;
 };
 
 #endif //HW2_CONTROL_H

@@ -1,6 +1,6 @@
 #include "Control.h"
 #include "iostream"
-#include "string.h"
+#include <cstring>
 
 int Control::id_counter = 0;
 
@@ -110,6 +110,7 @@ Size &Size::operator=(const Size &other) {
 }
 
 Control::Control() {
+    text_len = 0;
     size = Size();
     position = Position();
     text = nullptr;
@@ -121,6 +122,7 @@ Control::Control() {
 }
 
 Control::Control(Position &new_pos, Size &new_size, const char *new_text, inout new_type) {
+    text_len = strlen(new_text);
     position = new_pos; // no validations needed
     size = new_size;    // position and size would have already been validated
     text = new char[strlen(new_text)];
@@ -151,7 +153,8 @@ Control::Control(
     } catch (...) {
         std::cout << "Height and length must be positive real numbers.";
     }
-    text = new char[strlen(new_text)];
+    text_len = strlen(new_text);
+    text = new char[text_len];
     strcpy(text, new_text);
     type = new_type;
 
@@ -161,6 +164,7 @@ Control::Control(
 }
 
 Control::Control(Control &other) {
+    text_len = other.get_text_len();
     position = other.position;
     size = other.size;
     text = new char[strlen(other.get_text())];
@@ -198,19 +202,24 @@ void Control::set_type_enum(inout new_type) {
     type = new_type;
 }
 
-void Control::set_text(const char *new_text) {
+void Control::set_text(const char* new_text) {
     strcpy(text, new_text);
+}
+
+void Control::set_position(int x, int y) {
+    position.set_x_coordinate(x);
+    position.set_y_coordinate(y);
 }
 
 int Control::get_unique_id() const {
     return unique_id;
 }
 
-Size Control::get_size() {
+Size& Control::get_size() {
     return size;
 }
 
-Position Control::get_position() {
+Position& Control::get_position() {
     return position;
 }
 
@@ -222,6 +231,6 @@ inout Control::get_type() {
     return type;
 }
 
-const char *Control::get_type_text() const {
+const char *Control::get_type_str() const {
     return type == input ? "Input" : type == output ? "Output" : "Both";
 }
